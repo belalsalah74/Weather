@@ -1,6 +1,5 @@
 const apiKey = "d839e7830c194ec798072324241012";
 const baseUrl = "https://api.weatherapi.com/v1";
-
 const elements = {
   weatherContent: document.querySelector(".weather-content"),
   errorMsg: document.getElementById("error-msg"),
@@ -70,17 +69,16 @@ const compass = {
   SSW: "Sout - South West",
   WSW: "West - South West",
 };
-const forecasTdays = {
-  today: days[new Date().getDay()],
-  day2: days[new Date().getDay() + 1],
-  day3: days[new Date().getDay() + 2],
-  todayNumber: new Date().getDate(),
-  month: months[new Date().getMonth()],
+const date = new Date();
+const forecastDays = {
+  today: days[date.getDay()],
+  day2: days[date.getDay() + 1],
+  day3: days[date.getDay() + 2],
+  todayNumber: date.getDate(),
+  month: months[date.getMonth()],
 };
 
-
 init();
-
 
 function init() {
   navigator.geolocation.getCurrentPosition(
@@ -119,17 +117,16 @@ function displayData(response) {
   if (response.error) {
     elements.weatherContent.classList.add("d-none");
   } else {
-    const date = new Date(response.forecast.forecastday[0].date);
     elements.city.textContent = response.location.name;
-    elements.dayOne.textContent = forecasTdays.today;
-    elements.dayOneMonth.textContent = `${forecasTdays.todayNumber} ${forecasTdays.month}`;
+    elements.dayOne.textContent = forecastDays.today;
+    elements.dayOneMonth.textContent = `${forecastDays.todayNumber} ${forecastDays.month}`;
     elements.dayOneDegree.textContent = response.current.temp_c + "°c";
     elements.dayOneIcon.src = response.current.condition.icon;
     elements.dayOneText.textContent = response.current.condition.text;
 
-    elements.dayTwo.textContent = forecasTdays.day2;
-    elements.dayTwoMonth.textContent = `${date.getDate() + 1} ${
-      forecasTdays.month
+    elements.dayTwo.textContent = forecastDays.day2;
+    elements.dayTwoMonth.textContent = `${forecastDays.todayNumber + 1} ${
+      forecastDays.month
     }`;
     elements.dayTwoDegree.textContent =
       response.forecast.forecastday[1].day.maxtemp_c + "°c";
@@ -140,9 +137,9 @@ function displayData(response) {
     elements.dayTwoText.textContent =
       response.forecast.forecastday[1].day.condition.text;
     null;
-    elements.dayThree.textContent = response.error ? forecasTdays.day3 : null;
-    elements.dayThreeMonth.textContent = `${date.getDate() + 2} ${
-      forecasTdays.month
+    elements.dayThree.textContent = forecastDays.day3;
+    elements.dayThreeMonth.textContent = `${forecastDays.todayNumber + 2} ${
+      forecastDays.month
     }`;
     elements.dayThreeDegree.textContent =
       response.forecast.forecastday[2].day.maxtemp_c + "°c";
