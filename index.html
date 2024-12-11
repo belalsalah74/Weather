@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body data-bs-theme="dark">
+    <div class="wrapper min-vh-100">
+      <header>
+        <nav
+          class="navbar bg-dark px-5 py-3 justify-content-start align-items-center gap-2"
+        >
+          <img src="./imgs/logo.png" alt="Logo" class="img-fluid" />
+          <a
+            href="
+            #"
+            class="fw-bold text-white text-decoration-none mt-2"
+          >
+            Weather
+          </a>
+        </nav>
+      </header>
+      <!-- Main content -->
+      <main class="p-5">
+        <div class="container">
+          <!-- Search input -->
+          <div class="row">
+            <div class="col-md-6 mx-auto">
+              <div
+                class="input-group mb-5 rounded-5 overflow-hidden p-2 bg-dark"
+              >
+                <input
+                  type="search"
+                  class="form-control py-3 border-0"
+                  placeholder="Enter your city"
+                  id="search"
+                  aria-labelibedby="button-addon2"
+                />
+                <button
+                  class="btn btn-info rounded-pill w-25"
+                  type="button"
+                  id="search-btn"
+                >
+                  Search
+                </button>
+              </div>
+            </div>
+          </div>
+          <!-- Spinner -->
+          <div class="spinner-holder text-center">
+            <div class="spinner-border" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </div>
+          <!-- Error messages -->
+          <div id="message" class="col-10 mx-auto text-center d-none">
+            <p id="error-msg" class="text-secondary-emphasis"></p>
+          </div>
+          <div class="weather-content d-none">
+          <div class="row">
+            <!-- Start Weather content -->
+              <div class="col-md-6 col-lg-4 mb-3 mb-lg-0">
+                <div
+                  class="h-100 bg-dark shadow rounded-4 overflow-hidden mb-3"
+                  id="day-1"
+                >
+                  <div
+                    class="bg-dark-subtle d-flex justify-content-between p-3"
+                  >
+                    <span class="day small text-secondary-emphasis"></span>
+                    <span
+                      class="day-month small text-secondary-emphasis"
+                    ></span>
+                  </div>
+                  <div class="content p-4">
+                    <h2 class="city h6 mb-3 text-secondary-emphasis"></h2>
+                    <div
+                      class="d-flex gap-3 gap-lg-1 align-items-center justify-content-center"
+                    >
+                      <h1 class="degree mb-1 text-white display-1 fw-bold"></h1>
+                      <img alt="weather-icon" class="weather-icon img-fluid" />
+                    </div>
+                    <h3
+                      class="text small text-capitalize text-primary mb-3"
+                    ></h3>
+                    <span
+                      class="small me-3 icon-link text-secondary-emphasis rain"
+                    >
+                      <i class="fa-solid fa-umbrella"></i>
+                    </span>
+                    <span
+                      class="small me-3 icon-link text-secondary-emphasis wind"
+                    >
+                      <i class="fa-solid fa-wind"></i>
+                    </span>
+                    <span
+                      class="small me-3 icon-link text-secondary-emphasis compass"
+                    >
+                      <i class="fa-solid fa-compass"></i>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 col-lg-4 mb-3 mb-lg-0">
+                <div
+                  class="h-100 bg-dark shadow rounded-4 overflow-hidden mb-3 text-center"
+                  id="day-2"
+                >
+                  <div
+                    class="bg-dark-subtle d-flex justify-content-between p-3"
+                  >
+                    <span class="day small text-secondary-emphasis"></span>
+                    <span
+                      class="day-month small text-secondary-emphasis"
+                    ></span>
+                  </div>
+                  <div class="content p-4">
+                    <img alt="" class="weather-icon img-fluid mb-3" />
+                    <h3 class="degree mb-1 text-white fs-6 fw-bold"></h3>
+                    <h3
+                      class="min-degree mb-3 text-secondary-emphasis small fw-bold"
+                    ></h3>
+
+                    <h3
+                      class="text small text-capitalize text-primary mb-3"
+                    ></h3>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 col-lg-4 mb-3 mb-lg-0">
+                <div
+                  class="h-100 bg-dark shadow rounded-4 overflow-hidden mb-3 text-center"
+                  id="day-3"
+                >
+                  <div
+                    class="bg-dark-subtle d-flex justify-content-between p-3"
+                  >
+                    <span class="day small text-secondary-emphasis"></span>
+                    <span
+                      class="day-month small text-secondary-emphasis"
+                    ></span>
+                  </div>
+                  <div class="content p-4">
+                    <img alt="" class="weather-icon img-fluid mb-3" />
+                    <h3 class="degree mb-1 text-white fs-6 fw-bold"></h3>
+                    <h3
+                      class="min-degree mb-3 text-secondary-emphasis small fw-bold"
+                    ></h3>
+                    <h3 class="text small text-capitalize text-primary"></h3>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+    <script src="./js/index.js"></script>
+  </body>
+</html>
