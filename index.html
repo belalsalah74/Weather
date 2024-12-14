@@ -28,7 +28,7 @@
         <div class="container">
           <!-- Search input -->
           <div class="row">
-            <div class="col-md-6 mx-auto">
+            <form class="col-md-6 mx-auto">
               <div
                 class="input-group mb-5 rounded-5 overflow-hidden p-2 bg-dark"
               >
@@ -41,13 +41,13 @@
                 />
                 <button
                   class="btn btn-info rounded-pill w-25"
-                  type="button"
+                  type="submit"
                   id="search-btn"
                 >
                   Search
                 </button>
               </div>
-            </div>
+            </form>
           </div>
           <!-- Spinner -->
           <div class="spinner-holder text-center">
@@ -76,7 +76,12 @@
                     ></span>
                   </div>
                   <div class="content p-4">
-                    <h2 class="city h6 mb-3 text-secondary-emphasis"></h2>
+                    <d-flex
+                      class="d-flex justify-content-between text-secondary-emphasis mb-3"
+                    >
+                      <h2 class="city h6"></h2>
+                      <h3 class="h6 time"></h3>
+                    </d-flex>
                     <div
                       class="d-flex gap-3 gap-lg-1 align-items-center justify-content-center"
                     >

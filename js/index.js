@@ -5,6 +5,7 @@ const elements = {
   errorMsg: document.getElementById("error-msg"),
   spinnerHolder: document.querySelector(".spinner-holder"),
   city: document.querySelector(".city"),
+  time: document.querySelector(".time"),
   dayOne: document.querySelector("#day-1 .day"),
   dayOneMonth: document.querySelector("#day-1 .day-month"),
   dayOneDegree: document.querySelector("#day-1 .degree"),
@@ -26,7 +27,7 @@ const elements = {
   wind: document.querySelector(".wind"),
   compass: document.querySelector(".compass"),
   searchInput: document.getElementById("search"),
-  searchBtn: document.getElementById("search-btn"),
+  form: document.forms[0],
 };
 const days = [
   "Sunday",
@@ -69,14 +70,6 @@ const compass = {
   SSW: "Sout - South West",
   WSW: "West - South West",
 };
-const date = new Date();
-const forecastDays = {
-  today: days[date.getDay()],
-  day2: days[date.getDay() + 1],
-  day3: days[date.getDay() + 2],
-  todayNumber: date.getDate(),
-  month: months[date.getMonth()],
-};
 
 init();
 
@@ -117,9 +110,22 @@ function displayData(response) {
   if (response.error) {
     elements.weatherContent.classList.add("d-none");
   } else {
+    let date = new Date(response.location.localtime);
+    const forecastDays = {
+      today: days[date.getDay()],
+      time: date.toLocaleTimeString().replace(/:\d{2}(?!.*:\d{2})/, ""),
+      day2: days[date.getDay() < 6 ? date.getDay() + 1 : 0],
+      day3: days[date.getDay() < 5 ? date.getDay() + 2 : date.getDay() - 5],
+      todayNumber: date.getDate(),
+      month: months[date.getMonth()],
+    };
+
     elements.city.textContent = response.location.name;
     elements.dayOne.textContent = forecastDays.today;
-    elements.dayOneMonth.textContent = `${forecastDays.todayNumber} ${forecastDays.month}`;
+    elements.time.textContent = forecastDays.time;
+    elements.dayOneMonth.textContent = `${forecastDays.todayNumber} ${
+      forecastDays.month
+    } ${date.getFullYear()}`;
     elements.dayOneDegree.textContent = response.current.temp_c + "°c";
     elements.dayOneIcon.src = response.current.condition.icon;
     elements.dayOneText.textContent = response.current.condition.text;
@@ -149,12 +155,12 @@ function displayData(response) {
       response.forecast.forecastday[2].day.condition.icon;
     elements.dayThreeText.textContent =
       response.forecast.forecastday[2].day.condition.text;
-    elements.rain.append(`${response.current.humidity}%`);
-    elements.wind.append(`${response.current.wind_kph}km/h`);
-    elements.compass.append(compass[response.current.wind_dir]);
+    elements.rain.textContent = `${response.current.humidity}%`;
+    elements.wind.textContent = `${response.current.wind_kph}km/h`;
+    elements.compass.textContent = compass[response.current.wind_dir];
     elements.errorMsg.parentElement.classList.add("d-none");
-    elements.weatherContent.classList.remove("d-none");
     elements.spinnerHolder.classList.add("d-none");
+    elements.weatherContent.classList.remove("d-none");
   }
 }
 function showError(msg) {
@@ -163,7 +169,8 @@ function showError(msg) {
   elements.errorMsg.textContent = msg;
 }
 
-elements.searchBtn.addEventListener("click", () => {
+elements.form.addEventListener("submit", (e) => {
+  e.preventDefault();
   if (elements.searchInput.value) {
     getData(elements.searchInput.value);
   }
