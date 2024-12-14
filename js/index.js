@@ -155,9 +155,11 @@ function displayData(response) {
       response.forecast.forecastday[2].day.condition.icon;
     elements.dayThreeText.textContent =
       response.forecast.forecastday[2].day.condition.text;
-    elements.rain.innerHTML +=`${response.current.humidity}%`;
-    elements.wind.innerHTML +=`${response.current.wind_kph}km/h`;
-    elements.compass.innerHTML +=compass[response.current.wind_dir];
+    elements.rain.childNodes[2].textContent = `${response.current.humidity}%`;
+    elements.wind.childNodes[2].textContent = `${response.current.wind_kph}km/h`;
+    elements.compass.childNodes[2].textContent = `${
+      compass[response.current.wind_dir]
+    }`;
     elements.errorMsg.parentElement.classList.add("d-none");
     elements.spinnerHolder.classList.add("d-none");
     elements.weatherContent.classList.remove("d-none");
